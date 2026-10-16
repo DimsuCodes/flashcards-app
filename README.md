@@ -1,7 +1,21 @@
 # Mochi Cards: a flashcards app
 
 A vanilla HTML/CSS/JS flashcards app (no frameworks, no build step) with deck and card CRUD, a 3D flip study card,
-LocalStorage persistence, search, sound effects, a light and an opt-in dark theme, and a Frutiger Aero / Y2K look.
+LocalStorage persistence, search, sound effects, little interactive characters, and a soft sky-blue glass look with a light theme and an opt-in dark theme.
+
+## Preview
+
+**Light theme (default)**
+
+![Mochi Cards, light theme: deck list on the left, a study card in the middle with Flip, Previous and Next controls](assets/preview-light.png)
+
+**Dark theme (opt-in with the Dark button)**
+
+![Mochi Cards, dark theme](assets/preview-dark.png)
+
+**On a phone-width screen** (the sidebar becomes a strip above the main area)
+
+<img src="assets/preview-mobile.png" alt="Mochi Cards on a narrow screen: decks strip on top, then the welcome banner, search and the study card" width="320">
 
 ## Run it
 
@@ -18,7 +32,7 @@ If the page looks broken after an edit, hard-refresh with Ctrl+Shift+R (the brow
 | 5. Persistence & search | Saves to LocalStorage on every change, restores decks, cards and the last active deck, debounced (300 ms) case-insensitive search with a match count. |
 | 6. QA & polish | Empty states, error handling, accessibility audit, CSS-variable theming. |
 
-Extras: sound effects (with a mute button), three small interactive characters, a media-player style progress display.
+Extras: sound effects (with a mute button) and three small characters that change colour and mood when you press them.
 
 ## Keyboard
 
@@ -86,8 +100,8 @@ remembered). To follow the system setting instead, add `@media (prefers-color-sc
 
 - **Where AI saved time.** The big scaffolding jobs: the responsive grid with CSS variables, the accessible modal
   (focus trap, Esc, return focus), the LocalStorage layer with versioning and a validator, and the SVG characters. The
-  biggest win was iterating on looks: I pasted reference screenshots and got a restyle (Frutiger Aero, Y2K) in minutes
-  instead of hand-tuning gradients. It also wrote a small script to measure colour contrast instead of me eyeballing it.
+  biggest win was iterating on looks: I pasted reference screenshots and got whole restyles (I tried Frutiger Aero and
+  Y2K versions before going back to the original sky-blue look) in minutes instead of hand-tuning gradients. It also wrote a small script to measure colour contrast instead of me eyeballing it.
 - **An AI bug I caught, and the fix.** Two. (1) After renaming a deck, keyboard focus was lost: the code closed the modal
   and *then* re-rendered the sidebar, so it tried to focus a button that had just been replaced. I found it by testing
   with the keyboard only, and fixed it by rendering first, then closing the modal, and looking up the return target

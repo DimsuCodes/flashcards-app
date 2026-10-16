@@ -68,8 +68,6 @@ const backFaceEl = $("#card-back");
 const frontTextEl = $("#card-front-text");
 const backTextEl = $("#card-back-text");
 const cardCounterEl = $("#card-counter");
-const playerDisplayEl = $("#player-display");
-const progressFillEl = $("#progress-fill");
 const editCardBtn = $("#edit-card");
 const deleteCardBtn = $("#delete-card");
 const prevBtn = $("#prev-card");
@@ -239,7 +237,6 @@ function renderStudy({ resetFlip = true } = {}) {
     setFaceText(frontTextEl, card.front);
     setFaceText(backTextEl, card.back);
     cardCounterEl.textContent = `Card ${state.cardIndex + 1} of ${cards.length}`;
-    progressFillEl.style.width = `${((state.cardIndex + 1) / cards.length) * 100}%`;
   } else {
     setFaceText(frontTextEl, "");
     setFaceText(backTextEl, "");
@@ -251,7 +248,7 @@ function renderStudy({ resetFlip = true } = {}) {
   // Nothing to study: show an explanation and the next step instead of an empty card
   studyEmptyEl.hidden = hasCards;
   flashcardEl.hidden = !hasCards;
-  playerDisplayEl.hidden = !hasCards;
+  cardCounterEl.hidden = !hasCards;
   cardActionsEl.hidden = !hasCards;
   controlsEl.hidden = !hasCards;
   if (!hasCards) {

@@ -6,38 +6,12 @@
   <title>Mochi Cards</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script>try { if (localStorage.getItem("mochi-cards:theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
-
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <defs>
-      <radialGradient id="stk-pink" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ffe3f1"/><stop offset="0.45" stop-color="#ff9ccf"/><stop offset="1" stop-color="#ff5fae"/></radialGradient>
-      <radialGradient id="stk-blue" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#e6f7ff"/><stop offset="0.5" stop-color="#8fd6ff"/><stop offset="1" stop-color="#3fa4ec"/></radialGradient>
-    </defs>
-    <symbol id="sticker-heart" viewBox="0 0 48 48">
-      <path d="M24 43 C5 29 3 16 11 10 C17 6 23 9 24 15 C25 9 31 6 37 10 C45 16 43 29 24 43 Z" fill="url(#stk-pink)" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
-      <ellipse cx="15" cy="15" rx="6" ry="3.4" transform="rotate(-35 15 15)" fill="#ffffff" fill-opacity="0.85"/>
-    </symbol>
-    <symbol id="sticker-star" viewBox="0 0 48 48">
-      <polygon points="24,3 29.6,17.4 45,18.3 33.1,28.1 37,43 24,34.8 11,43 14.9,28.1 3,18.3 18.4,17.4" fill="url(#stk-pink)" fill-opacity="0.35" stroke="#ff5fae" stroke-width="3.4" stroke-linejoin="round"/>
-      <polygon points="24,3 29.6,17.4 45,18.3 33.1,28.1 37,43 24,34.8 11,43 14.9,28.1 3,18.3 18.4,17.4" fill="none" stroke="#ffffff" stroke-opacity="0.8" stroke-width="1" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="sticker-flower" viewBox="0 0 48 48">
-      <g fill="url(#stk-pink)" stroke="#ffffff" stroke-width="1.6">
-        <ellipse cx="24" cy="11" rx="8" ry="10"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(72 24 24)"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(144 24 24)"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(216 24 24)"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(288 24 24)"/>
-      </g>
-      <circle cx="24" cy="24" r="5.5" fill="#fff2a8" stroke="#ffffff" stroke-width="1.4"/>
-      <circle cx="22.4" cy="22.4" r="1.8" fill="#ffffff"/>
-    </symbol>
-    <symbol id="sticker-bubble" viewBox="0 0 48 48">
-      <circle cx="24" cy="24" r="20" fill="url(#stk-blue)" fill-opacity="0.35" stroke="#ffffff" stroke-width="2"/>
-      <ellipse cx="16" cy="15" rx="6" ry="3.6" transform="rotate(-35 16 15)" fill="#ffffff" fill-opacity="0.9"/>
-    </symbol>
-  </svg>
 
   <aside class="sidebar" aria-labelledby="decks-heading">
     <div class="brand">
@@ -123,18 +97,14 @@
 
   <main class="main" id="main">
     <section class="hero" aria-label="Welcome">
-      <div class="win-bar" aria-hidden="true">
-        <span class="win-title">:3.exe</span>
-        <span class="win-btns"><i class="win-btn">_</i><i class="win-btn">▢</i><i class="win-btn win-close">✕</i></span>
-      </div>
       <div class="hero-text">
         <h2>A calmer,<br>brighter you</h2>
         <p>Gentle flashcard sessions for a happier, more balanced mind.</p>
         <span class="script">Flip · Learn · Repeat ♡</span>
       </div>
-      <svg class="sticker st-hero-a" aria-hidden="true" focusable="false"><use href="#sticker-heart"/></svg>
-      <svg class="sticker st-hero-b" aria-hidden="true" focusable="false"><use href="#sticker-star"/></svg>
-      <svg class="sticker st-hero-c" aria-hidden="true" focusable="false"><use href="#sticker-bubble"/></svg>
+      <span class="deco deco-hero-a" aria-hidden="true">✦</span>
+      <span class="deco deco-hero-b" aria-hidden="true">♡</span>
+      <span class="deco deco-hero-c" aria-hidden="true">★</span>
       <div class="mascot">
         <button type="button" class="friend-btn" aria-label="Cheer up the jelly">
           <svg class="hero-jelly jelly" viewBox="0 -4 160 146" data-face="sleepy" data-react="happy" focusable="false" aria-hidden="true">
@@ -199,14 +169,13 @@
         <label for="card-search" class="visually-hidden">Search cards</label>
         <input type="search" id="card-search" class="search-input" placeholder="Search cards…" autocomplete="off">
       </div>
-      <button type="button" id="shuffle" class="btn btn-pink"><span aria-hidden="true">🔀</span> Shuffle</button>
+      <button type="button" id="shuffle" class="btn btn-ghost"><span aria-hidden="true">🔀</span> Shuffle</button>
       <button type="button" id="new-card" class="btn btn-primary">+ New Card</button>
     </div>
 
     <p id="search-count" class="search-count" role="status" aria-live="polite"></p>
 
     <section class="card-stage" aria-labelledby="deck-title">
-      <svg class="sticker st-stage" aria-hidden="true" focusable="false"><use href="#sticker-flower"/></svg>
       <div id="study-empty" class="empty-state" hidden>
         <span class="empty-icon" id="study-empty-icon" aria-hidden="true"></span>
         <h3 class="empty-title" id="study-empty-title"></h3>
@@ -227,13 +196,7 @@
           </div>
         </div>
       </div>
-      <div class="player-display" id="player-display">
-        <div class="lcd">
-          <span class="lcd-label" aria-hidden="true">▶ PLAYING</span>
-          <p class="card-counter" id="card-counter">0 cards</p>
-        </div>
-        <div class="progress" aria-hidden="true"><span class="progress-fill" id="progress-fill"></span></div>
-      </div>
+      <p class="card-counter" id="card-counter">0 cards</p>
       <div class="card-actions" role="group" aria-label="Current card">
         <button type="button" id="edit-card" class="btn btn-ghost btn-small"><span aria-hidden="true">✎</span> Edit card</button>
         <button type="button" id="delete-card" class="btn btn-ghost btn-small"><span aria-hidden="true">🗑</span> Delete card</button>
