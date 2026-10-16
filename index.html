@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mochi Cards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <script>try { if (localStorage.getItem("mochi-cards:theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="stk-pink" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ffe3f1"/><stop offset="0.45" stop-color="#ff9ccf"/><stop offset="1" stop-color="#ff5fae"/></radialGradient>
+      <radialGradient id="stk-blue" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#e6f7ff"/><stop offset="0.5" stop-color="#8fd6ff"/><stop offset="1" stop-color="#3fa4ec"/></radialGradient>
+    </defs>
+    <symbol id="sticker-heart" viewBox="0 0 48 48">
+      <path d="M24 43 C5 29 3 16 11 10 C17 6 23 9 24 15 C25 9 31 6 37 10 C45 16 43 29 24 43 Z" fill="url(#stk-pink)" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+      <ellipse cx="15" cy="15" rx="6" ry="3.4" transform="rotate(-35 15 15)" fill="#ffffff" fill-opacity="0.85"/>
+    </symbol>
+    <symbol id="sticker-star" viewBox="0 0 48 48">
+      <polygon points="24,3 29.6,17.4 45,18.3 33.1,28.1 37,43 24,34.8 11,43 14.9,28.1 3,18.3 18.4,17.4" fill="url(#stk-pink)" fill-opacity="0.35" stroke="#ff5fae" stroke-width="3.4" stroke-linejoin="round"/>
+      <polygon points="24,3 29.6,17.4 45,18.3 33.1,28.1 37,43 24,34.8 11,43 14.9,28.1 3,18.3 18.4,17.4" fill="none" stroke="#ffffff" stroke-opacity="0.8" stroke-width="1" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="sticker-flower" viewBox="0 0 48 48">
+      <g fill="url(#stk-pink)" stroke="#ffffff" stroke-width="1.6">
+        <ellipse cx="24" cy="11" rx="8" ry="10"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(72 24 24)"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(144 24 24)"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(216 24 24)"/><ellipse cx="24" cy="11" rx="8" ry="10" transform="rotate(288 24 24)"/>
+      </g>
+      <circle cx="24" cy="24" r="5.5" fill="#fff2a8" stroke="#ffffff" stroke-width="1.4"/>
+      <circle cx="22.4" cy="22.4" r="1.8" fill="#ffffff"/>
+    </symbol>
+    <symbol id="sticker-bubble" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="20" fill="url(#stk-blue)" fill-opacity="0.35" stroke="#ffffff" stroke-width="2"/>
+      <ellipse cx="16" cy="15" rx="6" ry="3.6" transform="rotate(-35 16 15)" fill="#ffffff" fill-opacity="0.9"/>
+    </symbol>
+  </svg>
+
+  <aside class="sidebar" aria-labelledby="decks-heading">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">🍃</span>
+      <div>
+        <h1>Mochi Cards</h1>
+        <p class="tagline">Small reviews. A brighter you.</p>
+      </div>
+    </div>
+    <div class="side-tools">
+      <button type="button" id="sound-toggle" class="btn btn-ghost btn-small" aria-pressed="true"><span class="sound-icon" aria-hidden="true">🔊</span> Sound</button>
+      <button type="button" id="theme-toggle" class="btn btn-ghost btn-small" aria-pressed="false"><span class="theme-icon" aria-hidden="true">🌙</span> Dark</button>
+    </div>
+    <h2 id="decks-heading">Your decks</h2>
+    <ul id="deck-list" class="deck-list">
+      <!-- app.js renders one .deck-row per deck -->
+    </ul>
+    <button type="button" id="new-deck" class="btn btn-primary btn-block">+ New Deck</button>
+
+    <!-- Decorative friend: a mochi bunny sitting and reading a card -->
+    <div class="sidebar-friend">
+      <span class="deco deco-a" aria-hidden="true">✦</span>
+      <span class="deco deco-b" aria-hidden="true">♡</span>
+      <span class="deco deco-c" aria-hidden="true">★</span>
+      <button type="button" class="friend-btn" aria-label="Pet the jelly">
+      <svg class="friend friend-sit jelly" viewBox="0 0 160 140" data-face="sig" data-react="happy" focusable="false" aria-hidden="true">
+        <defs>
+          <linearGradient id="jg-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.96"/><stop offset="1" class="js-body" stop-opacity="0.78"/></linearGradient>
+          <radialGradient id="jg-glow" cx="0.5" cy="0.95" r="0.65"><stop offset="0" class="js-glow0" stop-opacity="1"/><stop offset="0.55" class="js-glow1" stop-opacity="0.78"/><stop offset="1" class="js-glow2" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jg-glow2" cx="0.5" cy="0.3" r="0.6"><stop offset="0" class="js-g2a" stop-opacity="0.75"/><stop offset="1" class="js-g2b" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jg-hi" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jg-ground" cx="0.5" cy="0.5" r="0.5"><stop offset="0" class="js-ground" stop-opacity="0.5"/><stop offset="1" class="js-ground" stop-opacity="0"/></radialGradient>
+          <linearGradient id="jg-crown" x1="0" y1="1" x2="0" y2="0"><stop offset="0" class="js-crown-a" stop-opacity="0.95"/><stop offset="1" class="js-crown-b" stop-opacity="0.8"/></linearGradient>
+          <clipPath id="jg-clip"><path d="M80 18 C112 18 138 40 138 76 C138 104 114 122 80 122 C46 122 22 104 22 76 C22 40 48 18 80 18 Z"/></clipPath>
+        </defs>
+        <ellipse cx="80" cy="130" rx="54" ry="7" fill="url(#jg-ground)"/>
+        <g class="sit-body">
+          <g class="sit-ear sit-ear-l">
+            <path d="M80 22 Q82 13 80 6" fill="none" stroke="#4cc26a" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="71" cy="7" rx="10" ry="5" transform="rotate(-28 71 7)" fill="url(#jg-crown)" stroke="#ffffff" stroke-opacity="0.8" stroke-width="1.2"/>
+            <ellipse cx="89" cy="7" rx="10" ry="5" transform="rotate(28 89 7)" fill="url(#jg-crown)" stroke="#ffffff" stroke-opacity="0.8" stroke-width="1.2"/></g>
+          <ellipse cx="56" cy="122" rx="13" ry="7" fill="url(#jg-body)" stroke="#ffffff" stroke-width="2"/><ellipse cx="104" cy="122" rx="13" ry="7" fill="url(#jg-body)" stroke="#ffffff" stroke-width="2"/>
+          <path d="M80 18 C112 18 138 40 138 76 C138 104 114 122 80 122 C46 122 22 104 22 76 C22 40 48 18 80 18 Z" fill="url(#jg-body)"/>
+          <g clip-path="url(#jg-clip)">
+            <rect x="22" y="18" width="116" height="104" fill="url(#jg-glow2)"/>
+            <rect x="22" y="18" width="116" height="104" fill="url(#jg-glow)"/>
+          </g>
+          <ellipse cx="80" cy="113" rx="34" ry="6" fill="#ffffff" fill-opacity="0.3"/>
+          <ellipse cx="50" cy="40" rx="21" ry="10" transform="rotate(-30 50 40)" fill="url(#jg-hi)"/>
+          <circle cx="38" cy="58" r="3.5" fill="#ffffff" fill-opacity="0.85"/>
+          <path d="M80 18 C112 18 138 40 138 76 C138 104 114 122 80 122 C46 122 22 104 22 76 C22 40 48 18 80 18 Z" fill="none" stroke="#ffffff" stroke-opacity="0.95" stroke-width="2.5"/>
+          <path class="jelly-rim" d="M80 18 C112 18 138 40 138 76 C138 104 114 122 80 122 C46 122 22 104 22 76 C22 40 48 18 80 18 Z" fill="none" stroke-opacity="0.35" stroke-width="1"/>
+          <g class="jelly-blush"><ellipse cx="48" cy="86" rx="10" ry="6" fill="#ff8fb0" fill-opacity="0.5"/><ellipse cx="112" cy="86" rx="10" ry="6" fill="#ff8fb0" fill-opacity="0.5"/></g>
+          <g class="face face-sig"><ellipse class="jelly-ink-fill" cx="62" cy="70" rx="6.5" ry="8.5"/><ellipse class="jelly-ink-fill" cx="98" cy="70" rx="6.5" ry="8.5"/>
+            <circle cx="64.5" cy="66" r="2.6" fill="#ffffff"/><circle cx="59.5" cy="74" r="1.3" fill="#ffffff"/>
+            <circle cx="100.5" cy="66" r="2.6" fill="#ffffff"/><circle cx="95.5" cy="74" r="1.3" fill="#ffffff"/>
+            <path class="jelly-ink" d="M72 85 Q80 93 88 85" fill="none" stroke-width="3.5" stroke-linecap="round"/></g>
+          <g class="face face-sleepy jelly-ink" fill="none" stroke-width="4" stroke-linecap="round">
+            <path d="M54 72 Q62 80 70 72"/><path d="M90 72 Q98 80 106 72"/>
+            <path d="M75 87 Q80 92 85 87" stroke-width="3.5"/>
+          </g>
+          <g class="face face-happy">
+            <path class="jelly-ink" d="M54 74 Q62 62 70 74 M90 74 Q98 62 106 74" fill="none" stroke-width="4" stroke-linecap="round"/>
+            <path class="jelly-ink-fill" d="M70 83 Q80 103 90 83 Z"/>
+            <ellipse cx="80" cy="93" rx="5" ry="3.4" fill="#ff8fb0"/>
+          </g>
+          <g class="face face-love">
+            <path d="M62 78 C50 69 54 60 62 66 C70 60 74 69 62 78 Z" fill="#ff5c8a"/><path d="M98 78 C86 69 90 60 98 66 C106 60 110 69 98 78 Z" fill="#ff5c8a"/>
+            <circle cx="58" cy="66" r="2" fill="#ffffff" fill-opacity="0.85"/><circle cx="94" cy="66" r="2" fill="#ffffff" fill-opacity="0.85"/>
+            <path class="jelly-ink" d="M72 85 Q80 93 88 85" fill="none" stroke-width="3.5" stroke-linecap="round"/>
+          </g>
+          <g class="face face-star">
+            <polygon points="62.00,60.00 64.65,66.36 71.51,66.91 66.28,71.39 67.88,78.09 62.00,74.50 56.12,78.09 57.72,71.39 52.49,66.91 59.35,66.36" fill="#ffd36b" stroke="#ffb84d" stroke-width="1" stroke-linejoin="round"/>
+            <polygon points="98.00,60.00 100.65,66.36 107.51,66.91 102.28,71.39 103.88,78.09 98.00,74.50 92.12,78.09 93.72,71.39 88.49,66.91 95.35,66.36" fill="#ffd36b" stroke="#ffb84d" stroke-width="1" stroke-linejoin="round"/>
+            <path class="jelly-ink" d="M70 83 Q80 99 90 83 Z" fill="none" stroke-width="3.5" stroke-linejoin="round"/>
+          </g><polygon points="80.00,94.00 84.11,103.34 94.27,104.36 86.66,111.16 88.82,121.14 80.00,116.00 71.18,121.14 73.34,111.16 65.73,104.36 75.89,103.34" fill="#ffd36b" stroke="#ffb84d" stroke-width="1.5" stroke-linejoin="round"/><ellipse cx="62" cy="110" rx="9" ry="8" fill="url(#jg-body)" stroke="#ffffff" stroke-width="2"/><ellipse cx="98" cy="110" rx="9" ry="8" fill="url(#jg-body)" stroke="#ffffff" stroke-width="2"/>
+        </g>
+      </svg>
+      </button>
+      <span class="friend-bubble" role="status" aria-live="polite"></span>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <section class="hero" aria-label="Welcome">
+      <div class="win-bar" aria-hidden="true">
+        <span class="win-title">:3.exe</span>
+        <span class="win-btns"><i class="win-btn">_</i><i class="win-btn">▢</i><i class="win-btn win-close">✕</i></span>
+      </div>
+      <div class="hero-text">
+        <h2>A calmer,<br>brighter you</h2>
+        <p>Gentle flashcard sessions for a happier, more balanced mind.</p>
+        <span class="script">Flip · Learn · Repeat ♡</span>
+      </div>
+      <svg class="sticker st-hero-a" aria-hidden="true" focusable="false"><use href="#sticker-heart"/></svg>
+      <svg class="sticker st-hero-b" aria-hidden="true" focusable="false"><use href="#sticker-star"/></svg>
+      <svg class="sticker st-hero-c" aria-hidden="true" focusable="false"><use href="#sticker-bubble"/></svg>
+      <div class="mascot">
+        <button type="button" class="friend-btn" aria-label="Cheer up the jelly">
+          <svg class="hero-jelly jelly" viewBox="0 -4 160 146" data-face="sleepy" data-react="happy" focusable="false" aria-hidden="true">
+        <defs>
+          <linearGradient id="jb-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.96"/><stop offset="1" class="js-body" stop-opacity="0.78"/></linearGradient>
+          <radialGradient id="jb-glow" cx="0.5" cy="0.95" r="0.65"><stop offset="0" class="js-glow0" stop-opacity="1"/><stop offset="0.55" class="js-glow1" stop-opacity="0.78"/><stop offset="1" class="js-glow2" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jb-glow2" cx="0.5" cy="0.3" r="0.6"><stop offset="0" class="js-g2a" stop-opacity="0.75"/><stop offset="1" class="js-g2b" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jb-hi" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jb-ground" cx="0.5" cy="0.5" r="0.5"><stop offset="0" class="js-ground" stop-opacity="0.5"/><stop offset="1" class="js-ground" stop-opacity="0"/></radialGradient>
+          <linearGradient id="jb-crown" x1="0" y1="1" x2="0" y2="0"><stop offset="0" class="js-crown-a" stop-opacity="0.95"/><stop offset="1" class="js-crown-b" stop-opacity="0.8"/></linearGradient>
+          <clipPath id="jb-clip"><path d="M20 74 C20 38 46 18 80 18 C114 18 140 38 140 74 L140 106 C140 118 128 120 120 112 C112 104 102 104 96 112 C90 120 70 120 64 112 C58 104 48 104 40 112 C32 120 20 118 20 106 Z"/></clipPath>
+        </defs>
+            <ellipse cx="80" cy="136" rx="46" ry="5" fill="url(#jb-ground)"/>
+            <g class="sit-body">
+          <g class="sit-ear sit-ear-l">
+            <circle cx="80" cy="9" r="8" fill="#ffffff" fill-opacity="0.4" stroke="#ffffff" stroke-opacity="0.95" stroke-width="2"/>
+            <circle cx="77" cy="6" r="2.2" fill="#ffffff"/></g>
+          <ellipse cx="15" cy="86" rx="8" ry="9" fill="url(#jb-body)" stroke="#ffffff" stroke-width="2"/><ellipse cx="145" cy="86" rx="8" ry="9" fill="url(#jb-body)" stroke="#ffffff" stroke-width="2"/>
+          <path d="M20 74 C20 38 46 18 80 18 C114 18 140 38 140 74 L140 106 C140 118 128 120 120 112 C112 104 102 104 96 112 C90 120 70 120 64 112 C58 104 48 104 40 112 C32 120 20 118 20 106 Z" fill="url(#jb-body)"/>
+          <g clip-path="url(#jb-clip)">
+            <rect x="20" y="18" width="120" height="104" fill="url(#jb-glow2)"/>
+            <rect x="20" y="18" width="120" height="104" fill="url(#jb-glow)"/>
+          </g>
+          <ellipse cx="54" cy="38" rx="23" ry="10" transform="rotate(-24 54 38)" fill="url(#jb-hi)"/>
+          <circle cx="36" cy="58" r="3.5" fill="#ffffff" fill-opacity="0.85"/>
+          <path d="M20 74 C20 38 46 18 80 18 C114 18 140 38 140 74 L140 106 C140 118 128 120 120 112 C112 104 102 104 96 112 C90 120 70 120 64 112 C58 104 48 104 40 112 C32 120 20 118 20 106 Z" fill="none" stroke="#ffffff" stroke-opacity="0.95" stroke-width="2.5"/>
+          <path class="jelly-rim" d="M20 74 C20 38 46 18 80 18 C114 18 140 38 140 74 L140 106 C140 118 128 120 120 112 C112 104 102 104 96 112 C90 120 70 120 64 112 C58 104 48 104 40 112 C32 120 20 118 20 106 Z" fill="none" stroke-opacity="0.35" stroke-width="1"/>
+          <g class="jelly-blush"><ellipse cx="46" cy="76" rx="11" ry="6" fill="#ff8fb0" fill-opacity="0.5"/><ellipse cx="114" cy="76" rx="11" ry="6" fill="#ff8fb0" fill-opacity="0.5"/></g>
+          <g class="face face-sig"><circle class="jelly-ink-fill" cx="62" cy="60" r="4.6"/><circle class="jelly-ink-fill" cx="98" cy="60" r="4.6"/>
+            <circle cx="63.6" cy="58.4" r="1.4" fill="#ffffff"/><circle cx="99.6" cy="58.4" r="1.4" fill="#ffffff"/>
+            <path class="jelly-ink" d="M74 71 Q80 77 86 71" fill="none" stroke-width="3" stroke-linecap="round"/></g>
+          <g class="face face-sleepy jelly-ink" fill="none" stroke-width="4" stroke-linecap="round">
+            <path d="M54 62 Q62 70 70 62"/><path d="M90 62 Q98 70 106 62"/>
+            <path d="M75 74 Q80 79 85 74" stroke-width="3.5"/>
+          </g>
+          <g class="face face-happy">
+            <path class="jelly-ink" d="M54 64 Q62 52 70 64 M90 64 Q98 52 106 64" fill="none" stroke-width="4" stroke-linecap="round"/>
+            <path class="jelly-ink-fill" d="M70 70 Q80 90 90 70 Z"/>
+            <ellipse cx="80" cy="80" rx="5" ry="3.4" fill="#ff8fb0"/>
+          </g>
+          <g class="face face-love">
+            <path d="M62 68 C50 59 54 50 62 56 C70 50 74 59 62 68 Z" fill="#ff5c8a"/><path d="M98 68 C86 59 90 50 98 56 C106 50 110 59 98 68 Z" fill="#ff5c8a"/>
+            <circle cx="58" cy="56" r="2" fill="#ffffff" fill-opacity="0.85"/><circle cx="94" cy="56" r="2" fill="#ffffff" fill-opacity="0.85"/>
+            <path class="jelly-ink" d="M72 72 Q80 80 88 72" fill="none" stroke-width="3.5" stroke-linecap="round"/>
+          </g>
+          <g class="face face-star">
+            <polygon points="62.00,50.00 64.65,56.36 71.51,56.91 66.28,61.39 67.88,68.09 62.00,64.50 56.12,68.09 57.72,61.39 52.49,56.91 59.35,56.36" fill="#ffd36b" stroke="#ffb84d" stroke-width="1" stroke-linejoin="round"/>
+            <polygon points="98.00,50.00 100.65,56.36 107.51,56.91 102.28,61.39 103.88,68.09 98.00,64.50 92.12,68.09 93.72,61.39 88.49,56.91 95.35,56.36" fill="#ffd36b" stroke="#ffb84d" stroke-width="1" stroke-linejoin="round"/>
+            <path class="jelly-ink" d="M70 70 Q80 86 90 70 Z" fill="none" stroke-width="3.5" stroke-linejoin="round"/>
+          </g>
+            </g>
+          </svg>
+        </button>
+        <span class="friend-bubble" role="status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <h2 id="deck-title" class="deck-title">No deck selected</h2>
+
+    <div class="toolbar" role="toolbar" aria-label="Deck tools">
+      <div class="search">
+        <label for="card-search" class="visually-hidden">Search cards</label>
+        <input type="search" id="card-search" class="search-input" placeholder="Search cards…" autocomplete="off">
+      </div>
+      <button type="button" id="shuffle" class="btn btn-pink"><span aria-hidden="true">🔀</span> Shuffle</button>
+      <button type="button" id="new-card" class="btn btn-primary">+ New Card</button>
+    </div>
+
+    <p id="search-count" class="search-count" role="status" aria-live="polite"></p>
+
+    <section class="card-stage" aria-labelledby="deck-title">
+      <svg class="sticker st-stage" aria-hidden="true" focusable="false"><use href="#sticker-flower"/></svg>
+      <div id="study-empty" class="empty-state" hidden>
+        <span class="empty-icon" id="study-empty-icon" aria-hidden="true"></span>
+        <h3 class="empty-title" id="study-empty-title"></h3>
+        <p class="empty-text" id="study-empty-text"></p>
+        <button type="button" class="btn btn-primary" id="study-empty-action"></button>
+      </div>
+
+      <!-- Click the card (or press Flip) to turn it over; .is-flipped drives the 3D animation -->
+      <div id="flashcard" class="flashcard">
+        <div class="flashcard-inner">
+          <div class="card-face card-front" id="card-front">
+            <span class="card-side">Front</span>
+            <p class="card-text" id="card-front-text"></p>
+          </div>
+          <div class="card-face card-back" id="card-back" aria-hidden="true">
+            <span class="card-side">Back</span>
+            <p class="card-text" id="card-back-text"></p>
+          </div>
+        </div>
+      </div>
+      <div class="player-display" id="player-display">
+        <div class="lcd">
+          <span class="lcd-label" aria-hidden="true">▶ PLAYING</span>
+          <p class="card-counter" id="card-counter">0 cards</p>
+        </div>
+        <div class="progress" aria-hidden="true"><span class="progress-fill" id="progress-fill"></span></div>
+      </div>
+      <div class="card-actions" role="group" aria-label="Current card">
+        <button type="button" id="edit-card" class="btn btn-ghost btn-small"><span aria-hidden="true">✎</span> Edit card</button>
+        <button type="button" id="delete-card" class="btn btn-ghost btn-small"><span aria-hidden="true">🗑</span> Delete card</button>
+      </div>
+
+      <!-- Decorative friend: a pink mochi hopping and tossing a star (only shown when the stage is wide) -->
+      <div class="card-friend">
+        <span class="deco deco-d" aria-hidden="true">✦</span>
+        <span class="deco deco-e" aria-hidden="true">♡</span>
+        <button type="button" class="friend-btn" aria-label="Play with the jelly">
+        <svg class="friend friend-play jelly" viewBox="0 0 160 192" data-face="sig" data-react="happy" focusable="false" aria-hidden="true">
+        <defs>
+          <linearGradient id="jp-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.96"/><stop offset="1" class="js-body" stop-opacity="0.78"/></linearGradient>
+          <radialGradient id="jp-glow" cx="0.5" cy="0.95" r="0.65"><stop offset="0" class="js-glow0" stop-opacity="1"/><stop offset="0.55" class="js-glow1" stop-opacity="0.78"/><stop offset="1" class="js-glow2" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jp-glow2" cx="0.5" cy="0.3" r="0.6"><stop offset="0" class="js-g2a" stop-opacity="0.75"/><stop offset="1" class="js-g2b" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jp-hi" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+          <radialGradient id="jp-ground" cx="0.5" cy="0.5" r="0.5"><stop offset="0" class="js-ground" stop-opacity="0.5"/><stop offset="1" class="js-ground" stop-opacity="0"/></radialGradient>
+          <linearGradient id="jp-crown" x1="0" y1="1" x2="0" y2="0"><stop offset="0" class="js-crown-a" stop-opacity="0.95"/><stop offset="1" class="js-crown-b" stop-opacity="0.8"/></linearGradient>
+          <clipPath id="jp-clip"><path d="M80 14 C106 14 124 36 124 70 C124 104 108 124 80 124 C52 124 36 104 36 70 C36 36 54 14 80 14 Z"/></clipPath>
+        </defs>
+          <ellipse class="play-shadow" cx="80" cy="186" rx="42" ry="6" fill="url(#jp-ground)"/>
+          <polygon class="play-star" points="80.00,2.00 83.53,11.15 93.31,11.67 85.71,17.85 88.23,27.33 80.00,22.00 71.77,27.33 74.29,17.85 66.69,11.67 76.47,11.15" fill="#ffd36b" stroke="#ffb84d" stroke-width="1.5" stroke-linejoin="round"/>
+          <g class="play-body">
+            <g transform="translate(0 56)">
+          <g class="sit-ear sit-ear-l">
+            <ellipse cx="62" cy="4" rx="9.5" ry="25" transform="rotate(-9 62 4)" fill="url(#jp-crown)" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.5"/>
+            <ellipse cx="62" cy="8" rx="4.5" ry="15" transform="rotate(-9 62 8)" fill="#ffb8cf" fill-opacity="0.85"/>
+            <ellipse cx="98" cy="4" rx="9.5" ry="25" transform="rotate(9 98 4)" fill="url(#jp-crown)" stroke="#ffffff" stroke-opacity="0.85" stroke-width="1.5"/>
+            <ellipse cx="98" cy="8" rx="4.5" ry="15" transform="rotate(9 98 8)" fill="#ffb8cf" fill-opacity="0.85"/></g>
+          <ellipse cx="27" cy="64" rx="9" ry="8" fill="url(#jp-body)" stroke="#ffffff" stroke-width="2"/><ellipse cx="133" cy="64" rx="9" ry="8" fill="url(#jp-body)" stroke="#ffffff" stroke-width="2"/><ellipse cx="62" cy="124" rx="12" ry="6" fill="url(#jp-body)" stroke="#ffffff" stroke-width="2"/><ellipse cx="98" cy="124" rx="12" ry="6" fill="url(#jp-body)" stroke="#ffffff" stroke-width="2"/>
+          <path d="M80 14 C106 14 124 36 124 70 C124 104 108 124 80 124 C52 124 36 104 36 70 C36 36 54 14 80 14 Z" fill="url(#jp-body)"/>
+          <g clip-path="url(#jp-clip)">
+            <rect x="36" y="14" width="88" height="110" fill="url(#jp-glow2)"/>
+            <rect x="36" y="14" width="88" height="110" fill="url(#jp-glow)"/>
+          </g>
+          <ellipse cx="80" cy="116" rx="26" ry="5" fill="#ffffff" fill-opacity="0.3"/>
+          <ellipse cx="62" cy="34" rx="15" ry="8" transform="rotate(-30 62 34)" fill="url(#jp-hi)"/>
+          <circle cx="50" cy="50" r="3" fill="#ffffff" fill-opacity="0.85"/>
+          <path d="M80 14 C106 14 124 36 124 70 C124 104 108 124 80 124 C52 124 36 104 36 70 C36 36 54 14 80 14 Z" fill="none" stroke="#ffffff" stroke-opacity="0.95" stroke-width="2.5"/>
+          <path class="jelly-rim" d="M80 14 C106 14 124 36 124 70 C124 104 108 124 80 124 C52 124 36 104 36 70 C36 36 54 14 80 14 Z" fill="none" stroke-opacity="0.35" stroke-width="1"/>
+          <g class="jelly-blush"><ellipse cx="54" cy="80" rx="8" ry="6" fill="#ff8fb0" fill-opacity="0.5"/><ellipse cx="106" cy="80" rx="8" ry="6" fill="#ff8fb0" fill-opacity="0.5"/></g>
+          <g class="face face-sig"><ellipse class="jelly-ink-fill" cx="66" cy="62" rx="6" ry="10"/><ellipse class="jelly-ink-fill" cx="94" cy="62" rx="6" ry="10"/>
+            <circle cx="68.2" cy="57" r="2.8" fill="#ffffff"/><circle cx="63.6" cy="67" r="1.4" fill="#ffffff"/>
+            <circle cx="96.2" cy="57" r="2.8" fill="#ffffff"/><circle cx="91.6" cy="67" r="1.4" fill="#ffffff"/>
+            <path class="jelly-ink" d="M72 77 Q76 83 80 77 Q84 83 88 77" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <ellipse cx="80" cy="84" rx="2.6" ry="2" fill="#ff8fb0"/></g>
+          <g class="face face-sleepy jelly-ink" fill="none" stroke-width="4" stroke-linecap="round">
+            <path d="M58 64 Q66 72 74 64"/><path d="M86 64 Q94 72 102 64"/>
+            <path d="M75 80 Q80 85 85 80" stroke-width="3.5"/>
+          </g>
+          <g class="face face-happy">
+            <path class="jelly-ink" d="M58 66 Q66 54 74 66 M86 66 Q94 54 102 66" fill="none" stroke-width="4" stroke-linecap="round"/>
+            <path class="jelly-ink-fill" d="M70 76 Q80 96 90 76 Z"/>
+            <ellipse cx="80" cy="86" rx="5" ry="3.4" fill="#ff8fb0"/>
+          </g>
+          <g class="face face-love">
+            <path d="M66 70 C54 61 58 52 66 58 C74 52 78 61 66 70 Z" fill="#ff5c8a"/><path d="M94 70 C82 61 86 52 94 58 C102 52 106 61 94 70 Z" fill="#ff5c8a"/>
+            <circle cx="62" cy="58" r="2" fill="#ffffff" fill-opacity="0.85"/><circle cx="90" cy="58" r="2" fill="#ffffff" fill-opacity="0.85"/>
+            <path class="jelly-ink" d="M72 78 Q80 86 88 78" fill="none" stroke-width="3.5" stroke-linecap="round"/>
+          </g>
+          <g class="face face-star">
+            <polygon points="66.00,52.00 68.65,58.36 75.51,58.91 70.28,63.39 71.88,70.09 66.00,66.50 60.12,70.09 61.72,63.39 56.49,58.91 63.35,58.36" fill="#ffd36b" stroke="#ffb84d" stroke-width="1" stroke-linejoin="round"/>
+            <polygon points="94.00,52.00 96.65,58.36 103.51,58.91 98.28,63.39 99.88,70.09 94.00,66.50 88.12,70.09 89.72,63.39 84.49,58.91 91.35,58.36" fill="#ffd36b" stroke="#ffb84d" stroke-width="1" stroke-linejoin="round"/>
+            <path class="jelly-ink" d="M70 76 Q80 92 90 76 Z" fill="none" stroke-width="3.5" stroke-linejoin="round"/>
+          </g>
+            </g>
+          </g>
+        </svg>
+        </button>
+        <span class="friend-bubble friend-bubble-right" role="status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <div class="controls" role="group" aria-label="Card controls">
+      <button type="button" id="prev-card" class="btn btn-ghost"><span aria-hidden="true">←</span> Previous</button>
+      <button type="button" id="flip-card" class="btn btn-primary" aria-pressed="false">Flip <span aria-hidden="true">🍡</span></button>
+      <button type="button" id="next-card" class="btn btn-ghost">Next <span aria-hidden="true">→</span></button>
+    </div>
+
+    <section class="card-list-section" aria-labelledby="card-list-heading">
+      <h3 id="card-list-heading" class="card-list-heading">Cards in this deck</h3>
+      <ul id="card-list" class="card-list">
+        <!-- app.js renders one .card-row per card -->
+      </ul>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p><small>Tip: pick a deck, press <kbd>Space</kbd> to flip, <kbd>←</kbd> / <kbd>→</kbd> to move between cards. · Made with 💙</small></p>
+  </footer>
+
+  <div id="app-notice" class="notice" role="alert" hidden>
+    <span id="app-notice-text"></span>
+    <button type="button" id="app-notice-dismiss" class="notice-dismiss" aria-label="Dismiss message">✕</button>
+  </div>
+
+  <p id="status" class="visually-hidden" role="status" aria-live="polite"></p>
+
+  <!-- One reusable modal: deck name form, card form (front/back), or a confirm dialog -->
+  <div id="modal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
+      <form id="modal-form" novalidate>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <p id="modal-desc" class="modal-desc"></p>
+        <div id="modal-field" class="field">
+          <label for="deck-name">Deck name</label>
+          <input type="text" id="deck-name" name="deck-name" maxlength="40" autocomplete="off" required aria-required="true" aria-describedby="deck-name-error">
+          <p id="deck-name-error" class="field-error" role="alert"></p>
+        </div>
+        <div id="modal-card-fields" hidden>
+          <div class="field">
+            <label for="card-front-input">Front</label>
+            <textarea id="card-front-input" name="card-front" rows="2" maxlength="200" required aria-required="true" aria-describedby="card-front-error"></textarea>
+            <p id="card-front-error" class="field-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="card-back-input">Back</label>
+            <textarea id="card-back-input" name="card-back" rows="2" maxlength="200" required aria-required="true" aria-describedby="card-back-error"></textarea>
+            <p id="card-back-error" class="field-error" role="alert"></p>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="modal-cancel" class="btn btn-ghost">Cancel</button>
+          <button type="submit" id="modal-confirm" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="sounds.js"></script>
+  <script src="app.js"></script>
+  <script src="friends.js"></script>
+  <script src="theme.js"></script>
+</body>
+</html>
